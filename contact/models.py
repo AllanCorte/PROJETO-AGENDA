@@ -1,27 +1,30 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
-# Create your models here.
 
-# id ja é gerado automatico
+# id (primary key - automático)
+# first_name (string), last_name (string), phone (string)
+# email (email), created_date (date), description (text)
+# category (foreign key), show (boolean), picture (imagem)
+# owner (foreign key)
 
 
 class Category(models.Model):
     class Meta:
         verbose_name = 'Category'
-        verbose_name_plural = 'categories'
+        verbose_name_plural = 'Categories'
 
     name = models.CharField(max_length=50)
 
     def __str__(self) -> str:
-        return f'{self.name}'
+        return self.name
 
 
 class Contact(models.Model):
     first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50, blank=True)
     phone = models.CharField(max_length=50)
-    email = models.EmailField(max_length=250, blank=True)
+    email = models.EmailField(max_length=254, blank=True)
     created_date = models.DateTimeField(default=timezone.now)
     description = models.TextField(blank=True)
     show = models.BooleanField(default=True)
